@@ -1,0 +1,30 @@
+version : "3.7"
+services :
+  proyectos-micro :
+    container_name : proyectos-micro
+    image : proyectos-micro:v1
+    build:
+      context: .
+    ports : 
+      - "3001"
+    networks:
+      - proyectos-app
+  proyectos-micro-2 :
+    container_name : proyectos-micro-2
+    image : proyectos-micro:v1
+    ports : 
+      - "3001"
+    networks:
+      - proyectos-app   
+  loader-balancer:
+    container_name : loader-balancer
+    image: loader-balancer:v1
+    build :
+      context : ./loader-balancer    
+    ports:
+      - "3002:80"
+    networks :
+      - proyectos-app
+
+networks :
+  proyectos-app :     
